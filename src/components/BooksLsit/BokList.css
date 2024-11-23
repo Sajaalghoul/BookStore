@@ -1,0 +1,11 @@
+.BooksList{
+    display:flex;
+    gap:40px;
+    margin: 30px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+.title{
+    font-weight: bold;
+    font-size: 15px;
+}
