@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 
-const UseFetch = (url, dependency) => {
+const UseFetch = (url, dependency = []) => {
   const [data, setData] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -24,7 +24,7 @@ const UseFetch = (url, dependency) => {
     };
 
     fetchData();
-  }, [dependency]);
+  }, Array.isArray(dependency) ? dependency : []); 
 
   return { data, isLoading, error };
 };

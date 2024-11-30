@@ -1,7 +1,8 @@
 import App from "./App";
 import BookDetails from "./components/BookDetails/BookDetails.jsx";
 import BookList from "./components/BooksLsit/BookList.jsx";
-import ErrorPage from "./components/ErrorPage/ErrorPage.jsx";
+import ErrorPage from "./components/ErrorPage/ErrorPage.jsx"
+import Favourites from "./components/Favourites/Favourites.jsx"
 const routes = [
   {
     path: "/",
@@ -17,6 +18,10 @@ const routes = [
         path: "Book/:BookId",
         element: <BookDetails />,
       },
+      {
+      path:"favourites",
+      element:<Favourites/>
+      }
     ],
   },
 ];

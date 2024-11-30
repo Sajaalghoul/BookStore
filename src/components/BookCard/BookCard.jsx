@@ -8,8 +8,9 @@ const BookCard = (props) => {
       <div className="imageContainer">
         <img  className="BookImage" src={props.image} alt="Book"/>
       </div>
-      <Link className="title" to={`/Book/${props.id}`}>{props.title}</Link>
+      <p className="title" >{props.title}</p>
       <p><span className="authors">Authors: </span>{props.authors}</p>
+      <button><Link to={`/Book/${props.id}`}  >Details</Link></button>
     </div>
   )
 }
