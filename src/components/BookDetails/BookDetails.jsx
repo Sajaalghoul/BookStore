@@ -5,22 +5,12 @@ import { useOutletContext } from "react-router-dom";
 
 const BookDetails = () => {
   const {BookId}=useParams();
-  const {setFavourites,favourites}=useOutletContext();
+  const {dispatch,favourites}=useOutletContext();
   const { data:book, isLoading, error } = UseFetch(
     `https://www.googleapis.com/books/v1/volumes/${BookId}`, 
     [BookId]
   );
-  const handleFavourites = () => {
-    setFavourites((prevFav) => {
-      const isFavourite = prevFav.some((fav) => fav.id === book.id);
-      if (isFavourite) {
-        return prevFav.filter((fav) => fav.id !== book.id); 
-      }
-      return [...prevFav, book]; 
-    });
-  };
 
-  
  if (error) {
     return <div>Error: {error}</div>;
   }
@@ -44,9 +34,9 @@ const BookDetails = () => {
           alt={book.volumeInfo?.title || "No image available"}
         />
         {favourites.find((favouritue) => favouritue.id === book.id) ? (
-          <button onClick={handleFavourites}>Remove from favourites</button>
+          <button onClick={()=>{dispatch({ type: "REMOVE_FAVOURITE", payload: book.id })}}>Remove from favourites</button>
         ) : (
-          <button onClick={handleFavourites}>Add to favourites</button>
+          <button onClick={()=>{dispatch({ type: "ADD_FAVOURITE", payload: book })}}>Add to favourites</button>
         )}
       </div>
     </div>
