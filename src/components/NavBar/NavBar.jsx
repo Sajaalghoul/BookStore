@@ -2,7 +2,11 @@ import React from "react";
 import "./NavBar.css";
 import SearchBox from "../SearchBox/SearchBox";
 import { Link } from "react-router-dom";
+import { useContext } from "react";
+import ThemeContext  from '../../Contexts/ThemeProvider';
 const NavBar = (props) => {
+    const theme  = useContext(ThemeContext);
+    console.log("theme", theme);
   return (
     <nav className="header__nav">
       <span className="nav__logo">BooksLibrary</span>

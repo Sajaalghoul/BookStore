@@ -5,7 +5,7 @@ import UseFetch from './CustomeHooks/UseFetch'
 import UseDebounce from './CustomeHooks/UseDebounce'
 import { useReducer, useState} from "react";
 import { Outlet } from "react-router-dom";
-
+import ThemeProvider from "./Contexts/ThemeProvider";
 function App() {
 
   //handle  search
@@ -30,27 +30,22 @@ function App() {
 const favouritesReducer = (state, action) => {
   switch (action.type) {
     case "ADD_FAVOURITE":
-      const isFavourite = state.some((fav) => fav.id === action.payload.id);
-      if (!isFavourite) {
         return [...state, action.payload];
-      }
-      return state;
     case "REMOVE_FAVOURITE":
       return state.filter((fav) => fav.id !== action.payload);
     default:
       return state;
   }
 };
-
   const [favourites,dispatch]=useReducer(favouritesReducer, []);
   //local storage favourites
   //
   return (
-    <>
-      <NavBar handleSearch={handleSearch} SearchField={SearchField}></NavBar>
-      <Outlet context={{data,isLoading, error,dispatch,favourites}}/>
-    </>
-  );
+    <ThemeProvider>
+        <NavBar handleSearch={handleSearch} SearchField={SearchField}></NavBar>
+        <Outlet context={{data,isLoading, error,dispatch,favourites}}/>
+    </ThemeProvider>
+  )
 }
 
 export default App;
