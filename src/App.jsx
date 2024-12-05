@@ -42,7 +42,9 @@ const favouritesReducer = (state, action) => {
   return (
     <ThemeProvider>
         <NavBar handleSearch={handleSearch} SearchField={SearchField}></NavBar>
+        <main style={{ paddingTop: '9rem' }}>
         <Outlet context={{data,isLoading, error,dispatch,favourites}}/>
+        </main>
     </ThemeProvider>
   )
 }

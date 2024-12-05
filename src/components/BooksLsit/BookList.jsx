@@ -27,7 +27,7 @@ const BookList = () => {
           key={book.id}
           title={book.volumeInfo.title}
           image={thumbnail}
-          authors={book.volumeInfo.authors?.toString()}
+          categories={book.volumeInfo.categories?.toString()}
           id={book.id}
         />
       )
@@ -43,11 +43,12 @@ const BookList = () => {
   }if (currentData.length > 0) {
   return (
     <>
-      <div className="BooksList">{BooksList}</div>
-      <Pagination
+      <div className="flex gap-10 m-8 justify-center flex-wrap">{BooksList}</div>
+      <Pagination className="m-10"
         totalPosts={data?.items?.length}
         postsPerPage={postsPerPage}
         setCurrentPage={setCurrentPage}
+        currentPage={currentPage}
       />
     </>
   );
