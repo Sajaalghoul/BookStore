@@ -18,7 +18,7 @@ function App() {
     `https://www.googleapis.com/books/v1/volumes?q=${debounced}&key=AIzaSyAckshg1Ja2fM2ov7x6Qmq8CqR5WS0d0Ec&maxResults=40`, 
     [debounced]
   );
-  console.log(data);
+  console.log("fetched",data);
 //Handle search function
   const handleSearch=(event)=>{
     const {value}=event.target;
