@@ -4,7 +4,7 @@ import BookCard from "../BookCard/BookCard.jsx";
 const  Favourites= () => {
 const {favourites} = useOutletContext();
   return (
-    <div className="favouritesContainer">
+    <div className="flex gap-10 m-8 justify-center flex-wrap">
       {favourites.map((book)=>{
       const thumbnail =
       book.volumeInfo.imageLinks?.thumbnail ||
@@ -13,7 +13,7 @@ const {favourites} = useOutletContext();
           key={book.id}
           title={book.volumeInfo.title}
           image={thumbnail}
-          authors={book.volumeInfo.authors?.toString()}
+          categories={book.volumeInfo.categories?.toString()}
           id={book.id}
           />
    )

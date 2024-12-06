@@ -36,14 +36,14 @@ const NavBar = (props) => {
           <li className='max-lg:border-b max-lg:py-3'><NavLink to="/" onClick={closeMenu}
               className={({ isActive }) =>
                 `text-[20px] block font-semibold ${
-                  isActive ? 'underline' : 'hover:text-[#fff]'
+                  isActive ? 'underline' : 'hover:text-indigo-500'
                 }`
               }>Home</NavLink></li>
           <li className='group max-lg:border-b max-lg:py-3 relative'>
             <NavLink to="favourites" onClick={closeMenu}
               className={({ isActive }) =>
                 `text-[20px] block font-semibold ${
-                  isActive ? 'underline' : 'hover:text-[#fff]'
+                  isActive ? 'underline' : 'hover:text-indigo-500'
                 }`
               }>
               Favourites
@@ -52,7 +52,6 @@ const NavBar = (props) => {
         </ul>
       </div>
       <div className='flex items-center ml-auto space-x-8'>
-        {/* closeing the menue */}
         {!menuOpen &&(<button onClick={toggleMenu} className='lg:hidden'>
          <FontAwesomeIcon icon="bars" className="text-2xl" />
         </button>)}

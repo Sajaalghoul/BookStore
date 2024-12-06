@@ -11,7 +11,7 @@ function App() {
   //handle  search
   const[SearchField,setSearchField]=useState("coding");
   //debounce for timing fetching data based on changinging the srarch
-  const debounced=UseDebounce(SearchField,3000);
+  const debounced=UseDebounce(SearchField,1000);
   // custome fetch
   const { data, isLoading, error } = UseFetch(
     `https://www.googleapis.com/books/v1/volumes?q=${debounced}&key=AIzaSyAckshg1Ja2fM2ov7x6Qmq8CqR5WS0d0Ec&maxResults=40`, 
