@@ -2,12 +2,10 @@ import React from "react";
 import "./NavBar.css";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars } from '@fortawesome/free-solid-svg-icons';
-import { library } from '@fortawesome/fontawesome-svg-core';
 import SearchBox from "../SearchBox/SearchBox";
 import { NavLink } from "react-router-dom";
 import { useContext,useState } from "react";
 import { ThemeContext } from "../../Contexts/ThemeProvider";
-library.add(faBars);
 const NavBar = (props) => {
   const { theme, toggleTheme } = useContext(ThemeContext);
   // menu displaying
@@ -21,7 +19,7 @@ const NavBar = (props) => {
     setMenuOpen(false); 
   };
   return (
-<header className={`fixed top-0 left-0 w-full z-50 border-b ${theme === "light" ? 'bg-white text-black' : 'bg-[rgb(17,24,39)] text-white'} font-semibold min-h-[60px] px-20 py-3 tracking-wide pb-16`}>
+<header className={`fixed top-0 left-0 w-full z-50 border-b ${theme === "light" ? 'bg-white text-black' : 'bg-[rgb(17,24,39)] text-white'} font-semibold min-h-[60px] px-20 py-3 tracking-wide pb-8`}>
   <div className='flex flex-wrap items-center max-lg:gap-y-6 max-sm:gap-x-4'>
     <h1 className="w-36 text-2xl font-bold">BooksLibrary</h1>
     <div

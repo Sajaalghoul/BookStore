@@ -1,10 +1,14 @@
 import React from "react";
 import { useOutletContext } from "react-router-dom";
 import BookCard from "../BookCard/BookCard.jsx";
+import { useContext} from "react";
+import { ThemeContext } from "../../Contexts/ThemeProvider";
+  
 const  Favourites= () => {
+const { theme } = useContext(ThemeContext);
 const {favourites} = useOutletContext();
   return (
-    <div className="flex gap-10 m-8 justify-center flex-wrap">
+    <div className={`w-full h-full flex gap-10  justify-center flex-wrap ${theme === 'light' ? 'bg-white text-black' : 'bg-gray-900 text-white'}`} style={{ paddingTop: '9rem' }}>
       {favourites.map((book)=>{
       const thumbnail =
       book.volumeInfo.imageLinks?.thumbnail ||

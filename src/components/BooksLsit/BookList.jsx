@@ -2,9 +2,12 @@ import React ,{useState} from "react";
 import BookCard from "../BookCard/BookCard";
 import Pagination from "../Pagination/Pagination"
 import { useOutletContext } from "react-router-dom";
+import { useContext} from "react";
+import { ThemeContext } from "../../Contexts/ThemeProvider";
 import "./BokList.css";
 
 const BookList = () => {
+  const { theme } = useContext(ThemeContext);
   const {data,isLoading, error} = useOutletContext();
   // custome Api
 
@@ -42,15 +45,15 @@ const BookList = () => {
     return <div>Loading...</div>;
   }if (currentData.length > 0) {
   return (
-    <>
-      <div className="flex gap-10 m-8 justify-center flex-wrap">{BooksList}</div>
+    <div className={` ${theme === "light" ? 'bg-white text-black' : 'bg-[rgb(17,24,39)] text-white'}`} style={{ paddingTop: '9rem' }}>
+      <div className={`flex gap-10 m-8 justify-center flex-wrap  ${theme === "light" ? 'bg-white text-black' : 'bg-[rgb(17,24,39)] text-white'}`}>{BooksList}</div>
       <Pagination className="m-10"
         totalPosts={data?.items?.length}
         postsPerPage={postsPerPage}
         setCurrentPage={setCurrentPage}
         currentPage={currentPage}
       />
-    </>
+    </div>
   );
 }
 

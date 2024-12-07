@@ -14,6 +14,7 @@ const UseFetch = (url, dependency = []) => {
           throw new Error('Could not fetch the data for that resource');
         }
         const data = await response.json();
+        console.log(data);
         setData(data);
         setError(null);
       } catch (err) {
