@@ -42,7 +42,7 @@ const BookList = () => {
   }
 
   if (isLoading) {
-    return <div>Loading...</div>;
+    return <div className={` ${theme === "light" ? 'bg-white text-black' : 'bg-[rgb(17,24,39)] text-white'}`} style={{ paddingTop: '9rem' }}>Loading...</div>;
   }if (currentData.length > 0) {
   return (
     <div className={` ${theme === "light" ? 'bg-white text-black' : 'bg-[rgb(17,24,39)] text-white'}`} style={{ paddingTop: '9rem' }}>
@@ -58,7 +58,7 @@ const BookList = () => {
 }
 
 
-  if (currentData.length==0) {return <p>No books found</p>};
+  if (currentData.length==0) {return <p className={` ${theme === "light" ? 'bg-white text-black' : 'bg-[rgb(17,24,39)] text-white'}`} style={{ paddingTop: '9rem' }}>No books found</p>};
 };
 
 export default BookList;

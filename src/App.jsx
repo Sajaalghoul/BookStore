@@ -3,9 +3,10 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import NavBar from "./components/NavBar/NavBar";
 import UseFetch from './CustomeHooks/UseFetch';
 import UseDebounce from './CustomeHooks/UseDebounce';
-import { useReducer, useState, useEffect } from "react";
+import { useReducer, useState } from "react";
 import { Outlet } from "react-router-dom"; // Import useLocation to track route changes
 import ThemeProvider from "./Contexts/ThemeProvider";
+
 
 function App() {
   // Handle search field state

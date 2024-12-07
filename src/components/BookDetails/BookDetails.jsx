@@ -16,7 +16,7 @@ const BookDetails = () => {
   );
 
  if (error) {
-    return <div>Error: {error}</div>;
+    return <div >Error: {error}</div>;
   }
 
   if (isLoading) {
@@ -47,21 +47,20 @@ const BookDetails = () => {
           <p className="mt-2 text-slate-500">
             {book.volumeInfo?.publisher || "Unknown"}
           </p>
-
-          <button
-            className={`mt-4 rounded-md py-2 px-8 border text-center text-sm transition-all shadow-md ${theme === 'light' ? 'bg-slate-800 text-white hover:bg-slate-700' : 'bg-gray-700 text-white hover:bg-gray-600'}`}
-            type="button"
-          >
             {favourites.find((favouritue) => favouritue.id === book.id) ? (
-              <button onClick={() => { dispatch({ type: "REMOVE_FAVOURITE", payload: book.id }) }}>
+              <button className={`mt-4 rounded-md py-2 px-8 border text-center
+               text-sm transition-all shadow-md ${theme === 'light' ? 'bg-slate-800 text-white hover:bg-slate-700' : 'bg-gray-700 text-white hover:bg-gray-600'}`} 
+               onClick={() => { dispatch({ type: "REMOVE_FAVOURITE", payload: book.id }) }}>
                 Remove from favourites
               </button>
             ) : (
-              <button onClick={() => { dispatch({ type: "ADD_FAVOURITE", payload: book }) }}>
+              <button  className={`mt-4 rounded-md py-2 px-8 border text-center
+               text-sm transition-all shadow-md ${theme === 'light' ? 'bg-slate-800 text-white hover:bg-slate-700' : 'bg-gray-700 text-white hover:bg-gray-600'}`}
+                onClick={() => { dispatch({ type: "ADD_FAVOURITE", payload: book }) }}>
                 Add to favourites
               </button>
             )}
-          </button>
+
         </div>
       </div>
 

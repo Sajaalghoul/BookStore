@@ -2,7 +2,7 @@ import React from 'react'
 import { createContext,useState} from "react";
 export const ThemeContext = createContext();
 const ThemeProvider = ({ children }) => {
-    const [theme, setTheme] = useState();
+    const [theme, setTheme] = useState("light");
       
     const toggleTheme = () => {
       setTheme((prevTheme) => (prevTheme === "light" ? "dark" : "light"));
