@@ -1,7 +1,10 @@
 import React, { useEffect } from "react";
 import './SearchBox.css'
 import { useRef } from "react";
-const SearchBox = (props) => {
+import { useContext } from "react";
+import { SearchContext } from "../../Contexts/SearchProvider";
+const SearchBox = () => {
+  const { searchField,handleSearch } = useContext(SearchContext);
   const inputRef = useRef(); 
   useEffect(() => {
     if (inputRef.current) {
@@ -18,7 +21,7 @@ const SearchBox = (props) => {
       </path>
     </svg>
     <input ref={inputRef} placeholder='Find Your Books...'
-      className="w-full outline-none bg-transparent text-gray-600 font-semibold text-[15px]" value={props.searchField} onChange={props.handleSearch}  id="search" />
+      className="w-full outline-none bg-transparent text-gray-600 font-semibold text-[15px]" value={searchField} onChange={handleSearch}  id="search" />
   </div>
   );
 };

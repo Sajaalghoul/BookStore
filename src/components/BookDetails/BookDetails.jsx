@@ -1,14 +1,14 @@
 import React from 'react'
 import { useParams } from 'react-router-dom'
 import UseFetch from '../../CustomeHooks/UseFetch'
-import { useOutletContext } from "react-router-dom";
 import DOMPurify from 'dompurify';
 import { useContext} from "react";
 import { ThemeContext } from "../../Contexts/ThemeProvider";
+import { FavouritesContext } from "../../Contexts/FavouriteReducerProvider.jsx";
 
 const BookDetails = () => {
   const {BookId}=useParams();
-  const {dispatch,favourites}=useOutletContext();
+  const { favourites, dispatch } = useContext(FavouritesContext);
   const { theme } = useContext(ThemeContext);
   const { data:book, isLoading, error } = UseFetch(
     `https://www.googleapis.com/books/v1/volumes/${BookId}`, 

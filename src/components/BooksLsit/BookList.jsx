@@ -1,26 +1,39 @@
-import React ,{useState} from "react";
+import React, { useState, useContext } from "react";
 import BookCard from "../BookCard/BookCard";
-import Pagination from "../Pagination/Pagination"
-import { useOutletContext } from "react-router-dom";
-import { useContext} from "react";
+import Pagination from "../Pagination/Pagination";
+import UseFetch from "../../CustomeHooks/UseFetch";
+import UseDebounce from "../../CustomeHooks/UseDebounce";
 import { ThemeContext } from "../../Contexts/ThemeProvider";
+import { SearchContext } from "../../Contexts/SearchProvider";
 import "./BokList.css";
 
 const BookList = () => {
   const { theme } = useContext(ThemeContext);
-  const {data,isLoading, error} = useOutletContext();
-  // custome Api
+  const { searchField } = useContext(SearchContext);
 
-//pagenation
-  const [currentPage,setCurrentPage]=useState(1);
-  const postsPerPage=8;
-  const lastPostIndex=currentPage*postsPerPage;
-  const firstPostsIndex=lastPostIndex - postsPerPage;
-  const currentData = data?.items && data.items.length > 0 
-  ? data.items.slice(firstPostsIndex, lastPostIndex) 
-  : [];
-  // iterate and create books cards
-  const BooksList = currentData?.map((book) => {
+  // Debounce for timing fetching data based on search changes
+  const debounced = UseDebounce(searchField, 1000);
+
+  // Custom fetch
+  const { data, isLoading, error } = UseFetch(
+    debounced
+      ? `https://www.googleapis.com/books/v1/volumes?q=${debounced}&key=AIzaSyAckshg1Ja2fM2ov7x6Qmq8CqR5WS0d0Ec&maxResults=40`
+      : null, // Prevent initial unnecessary fetch
+    [debounced]
+  );
+
+  // Pagination
+  const [currentPage, setCurrentPage] = useState(1);
+  const postsPerPage = 8;
+  const lastPostIndex = currentPage * postsPerPage;
+  const firstPostsIndex = lastPostIndex - postsPerPage;
+  const currentData =
+    data?.items && data.items.length > 0
+      ? data.items.slice(firstPostsIndex, lastPostIndex)
+      : [];
+
+  // Generate book cards
+  const BooksList = currentData.map((book) => {
     const thumbnail =
       book.volumeInfo.imageLinks?.thumbnail ||
       book.volumeInfo.imageLinks?.smallThumbnail;
@@ -36,29 +49,41 @@ const BookList = () => {
       )
     );
   });
-  // dispaly them
-  if (error) {
-    return <div>Error: {error}</div>;
-  }
 
-  if (isLoading) {
-    return <div className={` ${theme === "light" ? 'bg-white text-black' : 'bg-[rgb(17,24,39)] text-white'}`} style={{ paddingTop: '9rem' }}>Loading...</div>;
-  }if (currentData.length > 0) {
+  // Render with ternary conditions
   return (
-    <div className={` ${theme === "light" ? 'bg-white text-black' : 'bg-[rgb(17,24,39)] text-white'}`} style={{ paddingTop: '9rem' }}>
-      <div className={`flex gap-10 m-8 justify-center flex-wrap  ${theme === "light" ? 'bg-white text-black' : 'bg-[rgb(17,24,39)] text-white'}`}>{BooksList}</div>
-      <Pagination className="m-10"
-        totalPosts={data?.items?.length}
-        postsPerPage={postsPerPage}
-        setCurrentPage={setCurrentPage}
-        currentPage={currentPage}
-      />
+    <div
+      className={`${
+        theme === "light" ? "bg-white text-black" : "bg-[rgb(17,24,39)] text-white"
+      }`}
+      style={{ paddingTop: "9rem" }}
+    >
+      {error ? (
+        <div>Error: {error}</div>
+      ) : isLoading ? (
+        <div>Loading...</div>
+      ) : currentData.length > 0 ? (
+        <>
+          <div
+            className={`flex gap-10 m-8 justify-center flex-wrap ${
+              theme === "light" ? "bg-white text-black" : "bg-[rgb(17,24,39)] text-white"
+            }`}
+          >
+            {BooksList}
+          </div>
+          <Pagination
+            className="m-10"
+            totalPosts={data?.items?.length}
+            postsPerPage={postsPerPage}
+            setCurrentPage={setCurrentPage}
+            currentPage={currentPage}
+          />
+        </>
+      ) : (
+        <div>No books found</div>
+      )}
     </div>
   );
-}
-
-
-  if (currentData.length==0) {return <p className={` ${theme === "light" ? 'bg-white text-black' : 'bg-[rgb(17,24,39)] text-white'}`} style={{ paddingTop: '9rem' }}>No books found</p>};
 };
 
 export default BookList;
