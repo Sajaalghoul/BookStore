@@ -19,9 +19,11 @@
     "bootstrap": "^5.3.3",
     "dompurify": "^3.2.2",
     "formik": "^2.4.6",
+    "js-cookie": "^3.0.5",
     "react": "^18.3.1",
     "react-bootstrap": "^2.10.5",
-    "react-dom": "^18.3.1"
+    "react-dom": "^18.3.1",
+    "yup": "^1.5.0"
   },
   "devDependencies": {
     "@eslint/js": "^9.13.0",
@@ -37,7 +39,7 @@
     "postcss": "^8.4.49",
     "prettier": "^2.8.8",
     "prettier-plugin-tailwind": "^2.2.12",
-    "react-router-dom": "^7.0.1",
+    "react-router-dom": "^7.0.2",
     "tailwindcss": "^3.4.16",
     "vite": "^5.4.10"
   }

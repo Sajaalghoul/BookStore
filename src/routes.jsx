@@ -3,23 +3,29 @@ import BookDetails from "./components/BookDetails/BookDetails.jsx";
 import BookList from "./components/BooksLsit/BookList.jsx";
 import ErrorPage from "./components/ErrorPage/ErrorPage.jsx"
 import Favourites from "./components/Favourites/Favourites.jsx"
+import Login from "./components/Login/Login.jsx";
+
 const routes = [
-  {
-    path: "/",
+    {
+      index: true, 
+      path:'/',
+      element: <Login/>,
+    },
+    {
+    path: "/main",
     element: <App />,
     errorElement: <ErrorPage />,
     children: [ 
       {
-        index: true, 
-        path:'/',
+        path:'/main',
         element: <BookList />,
       },
       {
-        path: "Book/:BookId",
+        path: "/main/Book/:BookId",
         element: <BookDetails />,
       },
       {
-      path:"favourites",
+      path:"/main/favourites",
       element:<Favourites/>
       }
     ],

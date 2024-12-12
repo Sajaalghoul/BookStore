@@ -1,29 +1,27 @@
 import React from 'react'
-import { useFormik } from 'formik';
-
+import { Formik, Form, Field, ErrorMessage } from "formik";
+import { SignupSchema } from '../../Schemas/Schemas'
 const FormVal = () => {
-    const formik = useFormik({
-        initialValues: {
-          email: '',
-        },
-        onSubmit: values => {
-          alert(JSON.stringify(values, null, 2));
-        },
-      });
-      return (
-        <form onSubmit={formik.handleSubmit}>
-          <label htmlFor="email">Email Address</label>
-          <input
-            id="email"
-            name="email"
-            type="email"
-            onChange={formik.handleChange}
-            value={formik.values.email}
-          />
-    
-          <button type="submit">Submit</button>
-        </form>
-      );
+  return (
+    <Formik initialValues={{ email: ""}} validationSchema={SignupSchema} onSubmit={values => {
+      console.log(values);
+    }}>
+        <Form>
+          <Field 
+               type="email"
+               name="email"
+               placeholder="Enter your Email"/>
+            <ErrorMessage name="email" component="div" />
+            <Field 
+               type="text"
+               name="fullname"
+               placeholder="Enter your name"/>
+            <ErrorMessage name="fullname" component="div" />
+   
+        </Form>
+        
+    </Formik>
+  )
 }
 
 export default FormVal

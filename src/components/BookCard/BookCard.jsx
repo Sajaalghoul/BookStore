@@ -28,7 +28,7 @@ const { theme } = useContext(ThemeContext);
       : 'bg-white text-black hover:bg-slate-500 hover:shadow-lg focus:bg-slate-500 focus:shadow-none active:bg-slate-500'}`}
       type="button"
     >
-      <Link to={`/Book/${props.id}`}>Details</Link>
+      <Link to={`/main/Book/${props.id}`}>Details</Link>
     </button>
   </div>
 </div>
