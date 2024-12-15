@@ -5,7 +5,7 @@
 export const SearchContext = createContext();
  const SearchProvider = ({ children }) => {
      // Handle search field state
-  const [searchField, setSearchField] = useState("coding");
+  const [searchField, setSearchField] = useState(" ");
     // Handle search function
     const handleSearch = (event) => {
         const { value } = event.target;

@@ -1,9 +1,0 @@
-.BookDetails {
-  display: flex;
-  gap: 10px;
-}
-.details {
-  display: flex;
-  flex-direction: column;
-  gap: 5px;
-}

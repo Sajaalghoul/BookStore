@@ -4,12 +4,16 @@ import BookList from "./components/BooksLsit/BookList.jsx";
 import ErrorPage from "./components/ErrorPage/ErrorPage.jsx"
 import Favourites from "./components/Favourites/Favourites.jsx"
 import Login from "./components/Login/Login.jsx";
+import withGoogleAuth from "./HighOrderComponents/withGoogleAuth/withGoogleAuth.jsx";
+
+// Wrap Login with the HOC
+const LoginWithGoogleAuth = withGoogleAuth(Login);
 
 const routes = [
     {
       index: true, 
       path:'/',
-      element: <Login/>,
+      element:  <LoginWithGoogleAuth />,
     },
     {
     path: "/main",

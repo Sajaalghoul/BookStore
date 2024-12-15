@@ -1,11 +1,12 @@
 
-import React from "react";
+import React,{memo} from "react";
 import './Pagination.css';
 
 const Pagination = ({ totalPosts, postsPerPage, currentPage, setCurrentPage }) => {
   let pages = [];
   const totalPages = Math.ceil(totalPosts / postsPerPage);
 
+  console.log("pagination")
   for (let i = 1; i <= totalPages; i++) {
     pages.push(i);
   }
@@ -50,4 +51,4 @@ const Pagination = ({ totalPosts, postsPerPage, currentPage, setCurrentPage }) =
   );
 };
 
-export default Pagination;
+export default memo(Pagination);
