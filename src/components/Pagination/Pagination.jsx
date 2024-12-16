@@ -1,6 +1,5 @@
 
 import React,{memo} from "react";
-import './Pagination.css';
 
 const Pagination = ({ totalPosts, postsPerPage, currentPage, setCurrentPage }) => {
   let pages = [];

@@ -1,5 +1,4 @@
 import React from 'react'
-import './BookCard.css'
 import { Link } from 'react-router-dom';
 import { useContext} from "react";
 import { ThemeContext } from "../../Contexts/ThemeProvider";

@@ -4,17 +4,14 @@ import UseFetch from "../../CustomeHooks/UseFetch";
 import UseDebounce from "../../CustomeHooks/UseDebounce";
 import { ThemeContext } from "../../Contexts/ThemeProvider";
 import { SearchContext } from "../../Contexts/SearchProvider";
-import "./BokList.css";
 import BookListView from "./BookListView";
 
 const BookList = () => {
   const { theme } = useContext(ThemeContext);
   const { searchField } = useContext(SearchContext);
-
   // Debounce for timing fetching data based on search changes
   const debounced = UseDebounce(searchField, 1000);
-  console.log("mybooklist here","search",searchField,"deb",debounced);
-
+  
   // Custom fetch
   const url = debounced?.trim()
   ? `https://www.googleapis.com/books/v1/volumes?q=${debounced}&key=AIzaSyAckshg1Ja2fM2ov7x6Qmq8CqR5WS0d0Ec&maxResults=40`

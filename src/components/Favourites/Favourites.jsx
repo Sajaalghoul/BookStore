@@ -3,7 +3,6 @@ import BookCard from "../BookCard/BookCard.jsx";
 import { useContext } from "react";
 import { ThemeContext } from "../../Contexts/ThemeProvider";
 import { FavouritesContext } from "../../Contexts/FavouriteReducerProvider.jsx";
-
 const Favourites = () => {
   const { theme } = useContext(ThemeContext);
   const { favourites } = useContext(FavouritesContext);
@@ -14,7 +13,7 @@ const Favourites = () => {
       }`}
       style={{ paddingTop: "9rem" }}
     >
-      {favourites.map((book) => {
+      {favourites?.map((book) => {
         const thumbnail =
           book.volumeInfo.imageLinks?.thumbnail ||
           book.volumeInfo.imageLinks?.smallThumbnail;

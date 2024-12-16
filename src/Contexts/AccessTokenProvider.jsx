@@ -8,6 +8,7 @@ export const AccessTokenContext = createContext();
 const AccessTokenProvider = ({ children }) => {
   const navigate = useNavigate();
   const [userDetails, setUserDetails] = useState(null);
+  const [accessToken] = useState(Cookies.get("access_token"));
 
   // Function to fetch user details
   const getUserDetails = async (accessToken) => {
@@ -21,10 +22,7 @@ const AccessTokenProvider = ({ children }) => {
       console.error("Error fetching user details:", error);
     }
   };
-
   useEffect(() => {
-    const accessToken = Cookies.get("access_token");
-
     if (!accessToken) {
       navigate("/main"); // Redirect if no access token is found
     } else {
@@ -33,7 +31,7 @@ const AccessTokenProvider = ({ children }) => {
   }, [navigate]);
 
   return (
-    <AccessTokenContext.Provider value={{ userDetails }}>
+    <AccessTokenContext.Provider value={{ userDetails,accessToken }}>
       {children}
     </AccessTokenContext.Provider>
   );

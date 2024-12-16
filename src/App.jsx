@@ -15,7 +15,7 @@ function App() {
           <NavBar/>
       <FavouriteReducerProvider>
           <Outlet />
-        </FavouriteReducerProvider>
+      </FavouriteReducerProvider>
       </SearchProvider>
       </AccessTokenProvider>
     </ThemeProvider>

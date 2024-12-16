@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 
-const UseFetch = (url, dependency = []) => {
+const UseFetch = (url, dependency = [], method = "GET", headers = {}) => {
   const [data, setData] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
@@ -14,23 +14,36 @@ const UseFetch = (url, dependency = []) => {
     const fetchData = async () => {
       try {
         setIsLoading(true);
-        const response = await fetch(url);
-        console.log(url);
+        const response = await fetch(url, {
+          method: method,  // Use the dynamic method here
+          headers: {
+            ...headers, // Include custom headers
+          },
+        });
+
         if (!response.ok) {
-          throw new Error('Could not fetch the data for that resource');
+          // Handle different response status codes
+          if (response.status === 401) {
+            throw new Error("Unauthorized access. Please login.");
+          } else if (response.status === 403) {
+            throw new Error("Forbidden access. You do not have permission.");
+          } else {
+            throw new Error("Could not fetch the data for that resource");
+          }
         }
+
         const data = await response.json();
         setData(data);
         setError(null);
       } catch (err) {
-        console.log("mydata",data);
         setError(err.message);
       } finally {
         setIsLoading(false);
       }
     };
- fetchData();
-  }, Array.isArray(dependency) ? dependency : []); 
+
+    fetchData();
+  }, [...dependency]);  // Watching the dependency array
 
   return { data, isLoading, error };
 };

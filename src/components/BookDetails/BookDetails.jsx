@@ -8,7 +8,7 @@ import { FavouritesContext } from "../../Contexts/FavouriteReducerProvider.jsx";
 
 const BookDetails = () => {
   const {BookId}=useParams();
-  const { favourites, dispatch } = useContext(FavouritesContext);
+  const { favourites, updateFavourites } = useContext(FavouritesContext);
   const { theme } = useContext(ThemeContext);
   const { data:book, isLoading, error } = UseFetch(
     `https://www.googleapis.com/books/v1/volumes/${BookId}`, 
@@ -50,13 +50,13 @@ const BookDetails = () => {
             {favourites.find((favouritue) => favouritue.id === book.id) ? (
               <button className={`mt-4 rounded-md py-2 px-8 border text-center
                text-sm transition-all shadow-md ${theme === 'light' ? 'bg-slate-800 text-white hover:bg-slate-700' : 'bg-gray-700 text-white hover:bg-gray-600'}`} 
-               onClick={() => { dispatch({ type: "REMOVE_FAVOURITE", payload: book.id }) }}>
+               onClick={() => { updateFavourites("REMOVE_FAVOURITE", book)}}>
                 Remove from favourites
               </button>
             ) : (
               <button  className={`mt-4 rounded-md py-2 px-8 border text-center
                text-sm transition-all shadow-md ${theme === 'light' ? 'bg-slate-800 text-white hover:bg-slate-700' : 'bg-gray-700 text-white hover:bg-gray-600'}`}
-                onClick={() => { dispatch({ type: "ADD_FAVOURITE", payload: book }) }}>
+                onClick={() => {  updateFavourites("ADD_FAVOURITE", book); }}>
                 Add to favourites
               </button>
             )}

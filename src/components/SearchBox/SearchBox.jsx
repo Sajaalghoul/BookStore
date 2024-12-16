@@ -1,5 +1,4 @@
 import React, { useEffect } from "react";
-import './SearchBox.css'
 import { useRef } from "react";
 import { useContext } from "react";
 import { SearchContext } from "../../Contexts/SearchProvider";

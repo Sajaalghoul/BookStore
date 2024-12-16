@@ -1,5 +1,4 @@
 import React, { useContext, useState } from "react";
-import "./NavBar.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars, faSun, faMoon } from "@fortawesome/free-solid-svg-icons";
 import { library } from "@fortawesome/fontawesome-svg-core";
@@ -38,8 +37,7 @@ const NavBar = () => {
       } font-semibold min-h-[60px] px-20 py-3 tracking-wide pb-16`}
     >
       <div className="flex flex-wrap items-center max-lg:gap-y-6 max-sm:gap-x-4">
-        <h1 className="w-36 text-2xl font-bold">BookLibrary</h1>
-        <p>hi {userDetails?.name}</p>
+        <h1 className="w-36 text-2xl font-bold">{userDetails?.name} Library</h1>
         <div
           id="collapseMenu"
           className={`max-lg:fixed max-lg:w-2/3 max-lg:min-w-[200px] max-lg:max-w-[300px] max-lg:box-border max-lg:top-0 max-lg:left-0 max-lg:px-6 max-lg:py-4 max-lg:h-full max-lg:shadow-md max-lg:overflow-auto z-50 
