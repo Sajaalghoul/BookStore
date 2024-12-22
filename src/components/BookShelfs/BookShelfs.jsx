@@ -1,23 +1,13 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useState } from 'react';
 import UseFetch from '../../CustomeHooks/UseFetch';
 import { AccessTokenContext } from '../../Contexts/AccessTokenProvider';
 import BookCard from '../BookCard/BookCard';
+import { BookShelvesContext } from '../../Contexts/BookShelvesProvider';
 
 const BookShelfs = () => {
   const { accessToken } = useContext(AccessTokenContext);
   const [shelf,setShelf]=useState([]);
-  const [BookShelves,setBookShelves]=useState([]);
-  const { data, isLoading, error } = UseFetch(
-    "https://www.googleapis.com/books/v1/mylibrary/bookshelves?key=AIzaSyDVJoJ9emOGe6Qsi2cf63H717RFn5P3Zb4",
-    [],
-    "GET",
-    { Authorization: `Bearer ${accessToken}` }
-  );
-  useEffect(()=>{
-    if(data){
-        setBookShelves(data.items);
-      }
-  },[data]);
+  const { BookShelves ,data, isLoading, error }=useContext(BookShelvesContext);
     //get the fetch function to do it conditionally
   const {callApi}=UseFetch();
 
@@ -28,24 +18,6 @@ const BookShelfs = () => {
         setShelf(shelfData.items);
     }  
   }
-//   const AddShelf=async()=>{
-//     const url=`https://www.googleapis.com/books/v1/mylibrary/bookshelves?key=AIzaSyDVJoJ9emOGe6Qsi2cf63H717RFn5P3Zb4`;
-//     const shelfData = await callApi(url, {
-//         method: "POST",
-//         headers: {
-//           Authorization: `Bearer ${accessToken}`,
-//           "Content-Type": "application/json",
-//         },
-//         body: JSON.stringify({ title: "hey" }),
-//       });
-//       if(shelfData){
-//         setBookShelves((prevShelves) => [...prevShelves, shelfData]); 
-//         console.log("kjkj",BookShelves);
-//       }
-     
-    
-//   }
-
   return (
     <div style={{ paddingTop: "9rem" }}>
       {error ? (
