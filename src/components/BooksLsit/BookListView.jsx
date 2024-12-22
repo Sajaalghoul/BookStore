@@ -1,8 +1,8 @@
-import React from 'react'
+import React,{memo} from 'react'
 import Pagination from "../Pagination/Pagination";
 //container presentaional dsign pattern
 
-const BookListView = ({theme,error,isLoading,data,BooksList,postsPerPage,setCurrentPage,currentPage}) => {
+const BookListView =({theme,error,isLoading,data,BooksList,postsPerPage,setCurrentPage,currentPage}) => {
   return (
     <div
     className={`${
@@ -38,4 +38,4 @@ const BookListView = ({theme,error,isLoading,data,BooksList,postsPerPage,setCurr
   )
 }
 
-export default BookListView
+export default memo(BookListView)

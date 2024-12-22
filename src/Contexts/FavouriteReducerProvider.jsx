@@ -2,25 +2,6 @@ import React, { createContext, useReducer, useEffect, useContext } from "react";
 import UseFetch from "../CustomeHooks/UseFetch";
 import { AccessTokenContext } from "./AccessTokenProvider";
 
-// Asynchronous API operation
-const handleAdd = async (AddOrRemove, book, accessToken) => {
-  const url = `https://www.googleapis.com/books/v1/mylibrary/bookshelves/0/${AddOrRemove}?volumeId=${book}&key=AIzaSyDVJoJ9emOGe6Qsi2cf63H717RFn5P3Zb4`;
-  try {
-    const response = await fetch(url, {
-      method: 'POST',
-      headers: {
-        Authorization: `Bearer ${accessToken}`,
-      },
-    });
-    if (!response.ok) {
-      throw new Error(`Failed to ${AddOrRemove} book.`);
-    }
-    return true; 
-  } catch (error) {
-    console.error(`Error during ${AddOrRemove}:`, error.message);
-    return false; 
-  }
-};
 
 // Reducer function (should be pure and not to call handle add here)
 const favouritesReducer = (state, action) => {
@@ -46,11 +27,9 @@ const FavouriteReducerProvider = ({ children }) => {
   // Fetch initial favourites data
   const { data } = UseFetch(
     "https://www.googleapis.com/books/v1/mylibrary/bookshelves/0/volumes?key=AIzaSyDVJoJ9emOGe6Qsi2cf63H717RFn5P3Zb4",
-    [accessToken],
+    [],
     "GET",
-    accessToken
-      ? { Authorization: `Bearer ${accessToken}` }
-      : null // Skip headers if accessToken is missing
+    { Authorization: `Bearer ${accessToken}` }
   );
 
   const [favourites, dispatch] = useReducer(favouritesReducer, []);
@@ -62,10 +41,14 @@ const FavouriteReducerProvider = ({ children }) => {
     }
   }, [data]);
 
+  //for posting
+  const {callApi}=UseFetch();
+  
   // Add or remove favourites (with API call)
   const updateFavourites = async (actionType, book) => {
     const AddOrRemove = actionType === "ADD_FAVOURITE" ? "addVolume" : "removeVolume";
-    const success = await handleAdd(AddOrRemove, book.id, accessToken);
+    const url = `https://www.googleapis.com/books/v1/mylibrary/bookshelves/0/${AddOrRemove}?volumeId=${book.id}&key=AIzaSyDVJoJ9emOGe6Qsi2cf63H717RFn5P3Zb4`;
+    const success = await callApi(url, { method: "POST", headers: { Authorization: `Bearer ${accessToken}` } });
     if (success) {
       dispatch({ type: actionType, payload: book });
     }

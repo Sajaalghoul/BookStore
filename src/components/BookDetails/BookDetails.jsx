@@ -56,10 +56,11 @@ const BookDetails = () => {
             ) : (
               <button  className={`mt-4 rounded-md py-2 px-8 border text-center
                text-sm transition-all shadow-md ${theme === 'light' ? 'bg-slate-800 text-white hover:bg-slate-700' : 'bg-gray-700 text-white hover:bg-gray-600'}`}
-                onClick={() => {  updateFavourites("ADD_FAVOURITE", book); }}>
+                onClick={() => { updateFavourites("ADD_FAVOURITE", book); }}>
                 Add to favourites
               </button>
             )}
+            
 
         </div>
       </div>

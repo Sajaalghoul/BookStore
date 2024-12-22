@@ -5,16 +5,18 @@ import UseDebounce from "../../CustomeHooks/UseDebounce";
 import { ThemeContext } from "../../Contexts/ThemeProvider";
 import { SearchContext } from "../../Contexts/SearchProvider";
 import BookListView from "./BookListView";
+import { GOOGLE_BOOKS_API_KEY } from "../../config";
 
 const BookList = () => {
   const { theme } = useContext(ThemeContext);
   const { searchField } = useContext(SearchContext);
   // Debounce for timing fetching data based on search changes
   const debounced = UseDebounce(searchField, 1000);
+  console.log("heyy",searchField,debounced);
   
   // Custom fetch
   const url = debounced?.trim()
-  ? `https://www.googleapis.com/books/v1/volumes?q=${debounced}&key=AIzaSyAckshg1Ja2fM2ov7x6Qmq8CqR5WS0d0Ec&maxResults=40`
+  ? `https://www.googleapis.com/books/v1/volumes?q=${debounced}&key=${GOOGLE_BOOKS_API_KEY}&maxResults=40`
   : null;
 
 const { data, isLoading, error } = UseFetch(url, [debounced]);

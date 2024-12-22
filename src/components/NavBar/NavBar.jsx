@@ -7,6 +7,7 @@ import { NavLink } from "react-router-dom";
 import { ThemeContext } from "../../Contexts/ThemeProvider";
 import { AccessTokenContext } from "../../Contexts/AccessTokenProvider";
 import { useLocation } from 'react-router-dom';
+import navigators from "../../Navigators";
 
 // Add the required icons to the library
 library.add(faBars, faSun, faMoon);
@@ -50,33 +51,22 @@ const NavBar = () => {
           }`}
         >
           <ul className="lg:flex lg:gap-x-10 lg:absolute lg:left-1/2 lg:-translate-x-1/2 max-lg:space-y-3 max-lg:fixed max-lg:w-2/3 max-lg:min-w-[300px] max-lg:top-0 max-lg:left-0 max-lg:px-10 max-lg:py-4 max-lg:h-full max-lg:shadow-md max-lg:overflow-auto z-50">
-            <li className="max-lg:border-b max-lg:py-3">
-              <NavLink
-                to="/main"
+            {navigators.map((navigator,idx)=>(
+            <li className="group max-lg:border-b max-lg:py-3" key={idx}>
+                <NavLink
+                to={navigator.route}
                 onClick={closeMenu}
-                end // Add the 'end' prop to match exact route
+                end // Ensure exact match for `home` or other routes
                 className={({ isActive }) =>
                   `text-[20px] block font-semibold ${
                     isActive ? "underline" : "hover:text-indigo-500"
                   }`
                 }
               >
-                Home
+                {navigator.name}
               </NavLink>
             </li>
-            <li className="group max-lg:border-b max-lg:py-3 relative">
-              <NavLink
-                to="/main/favourites"
-                onClick={closeMenu}
-                className={({ isActive }) =>
-                  `text-[20px] block font-semibold ${
-                    isActive ? "underline" : "hover:text-indigo-500"
-                  }`
-                }
-              >
-                Favourites
-              </NavLink>
-            </li>
+          ))}
           </ul>
         </div>
         <div className="flex items-center ml-auto space-x-8">
