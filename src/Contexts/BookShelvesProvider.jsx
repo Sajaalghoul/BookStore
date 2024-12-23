@@ -16,7 +16,7 @@ const BookShelvesProvider = ({ children }) => {
     );
     useEffect(()=>{
       if(data){
-          setBookShelves(data.items);
+          setBookShelves(data.items.filter((shelf) => shelf.access === 'PUBLIC'));
           console.log("hey",data.items);
         }
     },[data]);

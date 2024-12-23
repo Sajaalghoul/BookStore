@@ -1,13 +1,13 @@
 import React, { useState, useContext, useMemo,useEffect } from "react";
-import BookCard from "../BookCard/BookCard";
 import UseFetch from "../../CustomeHooks/UseFetch";
 import UseDebounce from "../../CustomeHooks/UseDebounce";
 import { ThemeContext } from "../../Contexts/ThemeProvider";
 import { SearchContext } from "../../Contexts/SearchProvider";
-import BookListView from "./BookListView";
 import { GOOGLE_BOOKS_API_KEY } from "../../config";
+import SearchedBooksView from "./SearchedBooksView";
 
-const BookList = () => {
+
+const SearchedBooks = () => {
   const { theme } = useContext(ThemeContext);
   const { searchField } = useContext(SearchContext);
   // Debounce for timing fetching data based on search changes
@@ -35,32 +35,14 @@ const { data, isLoading, error } = UseFetch(url, [debounced]);
     }, [data, firstPostsIndex, lastPostIndex]);
 
   // Generate book cards
-  const BooksList = useMemo(() => 
-    currentData.map((book) => {
-      const thumbnail =
-        book.volumeInfo.imageLinks?.thumbnail ||
-        book.volumeInfo.imageLinks?.smallThumbnail;
-      return (
-        thumbnail && (
-          <BookCard
-            key={book.id}
-            title={book.volumeInfo.title}
-            image={thumbnail}
-            categories={book.volumeInfo.categories?.toString()}
-            id={book.id}
-          />
-        )
-      );
-    }), [currentData]);
-
   // Render with ternary conditions
   return (
-    <BookListView
+    <SearchedBooksView
     theme={theme}
     error={error}
     isLoading={isLoading}
     data={data}
-    BooksList={BooksList}
+    currentData={currentData}
     postsPerPage={postsPerPage}
     setCurrentPage={setCurrentPage}
     currentPage={currentPage}
@@ -68,4 +50,4 @@ const { data, isLoading, error } = UseFetch(url, [debounced]);
   );
 };
 
-export default BookList;
+export default SearchedBooks;

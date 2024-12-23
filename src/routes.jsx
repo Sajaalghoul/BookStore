@@ -1,11 +1,12 @@
 import App from "./App";
 import BookDetails from "./components/BookDetails/BookDetails.jsx";
-import BookList from "./components/BooksLsit/BookList.jsx";
 import ErrorPage from "./components/ErrorPage/ErrorPage.jsx"
 import Favourites from "./components/Favourites/Favourites.jsx"
 import Login from "./components/Login/Login.jsx";
-import BookShelfs from "./components/BookShelfs/BookShelfs.jsx";
+import BookShelves from "./BookShelves/BookShelves.jsx";
 import withGoogleAuth from "./HighOrderComponents/withGoogleAuth/withGoogleAuth.jsx";
+import SearchedBooks from "./components/SearchedBooks/SearchedBooks.jsx";
+import BooksList from "./components/BooksLsit/BooksList.jsx";
 
 // Wrap Login with the HOC
 const LoginWithGoogleAuth = withGoogleAuth(Login);
@@ -23,7 +24,7 @@ const routes = [
     children: [ 
       {
         path:'/main',
-        element: <BookList />,
+        element: <SearchedBooks />,
       },
       {
         path: "/main/Book/:BookId",
@@ -34,8 +35,14 @@ const routes = [
       element:<Favourites/>
       },
       {
-        path:"/main/BookShelfs",
-        element:<BookShelfs/>
+        path:"/main/BookShelves",
+        element:<BookShelves/>,
+        children: [
+          {
+            path : "/main/BookShelves/:BookShelfId",
+            element:<BooksList/>
+          }
+        ]
       },
     ],
   },
