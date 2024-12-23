@@ -1,12 +1,15 @@
 import React, {memo,useContext} from "react";
 import BookCard from "../BookCard/BookCard";
 import { ThemeContext } from "../../Contexts/ThemeProvider";
+import { ShelfContext } from "../../Contexts/ShelfProvider";
 import { useParams } from "react-router-dom";
+
 const BooksList = ({booksData}) => {
-    const {BookShelfId}=useParams();
     const { theme } = useContext(ThemeContext);
-    console.log(BookShelfId);
-    const Books=booksData?.map((book) => {
+    const {BookShelfId}=useParams();
+    const {shelf}=useContext(ShelfContext);
+    const data = booksData || shelf;
+    const Books=data?.map((book) => {
         const thumbnail =
           book.volumeInfo.imageLinks?.thumbnail ||
           book.volumeInfo.imageLinks?.smallThumbnail;
@@ -19,6 +22,7 @@ const BooksList = ({booksData}) => {
               image={thumbnail}
               categories={book.volumeInfo.categories?.toString()}
               id={book.id}
+              BookShelfId={BookShelfId}
             />
           )
         )});

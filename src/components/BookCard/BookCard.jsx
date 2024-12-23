@@ -2,7 +2,23 @@ import React from 'react'
 import { Link } from 'react-router-dom';
 import { useContext} from "react";
 import { ThemeContext } from "../../Contexts/ThemeProvider";
+import { AccessTokenContext } from '../../Contexts/AccessTokenProvider';
+import { ShelfContext } from '../../Contexts/ShelfProvider';
+import UseFetch from '../../CustomeHooks/UseFetch';
 const BookCard = (props) => {
+  const {accessToken}=useContext(AccessTokenContext);
+  const {handleShelf}=useContext(ShelfContext);
+  
+  // if delete exist
+  const {callApi}=UseFetch();
+  const handleDelete=async(BookShelfId,BookId)=>{
+    const url =  `https://www.googleapis.com/books/v1/mylibrary/bookshelves/${BookShelfId}/removeVolume?volumeId=${BookId}&key=AIzaSyDVJoJ9emOGe6Qsi2cf63H717RFn5P3Zb4`;
+    const success = await callApi(url, { method: "POST", headers: { Authorization: `Bearer ${accessToken}` } });
+    if (success) {
+      handleShelf((prevData) => prevData.filter((book) => book.id !== BookId));
+      console.log("deleted");
+    }
+  }
 const { theme } = useContext(ThemeContext);
   return (
   <div className={`relative flex flex-col my-6 shadow-sm border rounded-lg w-80 ${theme === "light" ? 'bg-white text-black border-slate-200' : 'bg-[rgb(17,24,39)] text-white border-slate-700'}`}>
@@ -29,6 +45,13 @@ const { theme } = useContext(ThemeContext);
     >
       <Link to={`/main/Book/${props.id}`}>Details</Link>
     </button>
+    {
+      props.BookShelfId && 
+      <button onClick={()=>{handleDelete(props.BookShelfId,props.id)}}>
+        delete Book
+      </button>
+    }
+   
   </div>
 </div>
 

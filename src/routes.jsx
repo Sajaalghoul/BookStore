@@ -3,7 +3,7 @@ import BookDetails from "./components/BookDetails/BookDetails.jsx";
 import ErrorPage from "./components/ErrorPage/ErrorPage.jsx"
 import Favourites from "./components/Favourites/Favourites.jsx"
 import Login from "./components/Login/Login.jsx";
-import BookShelves from "./BookShelves/BookShelves.jsx";
+import BookShelves from "./components/BookShelves/BookShelves.jsx";
 import withGoogleAuth from "./HighOrderComponents/withGoogleAuth/withGoogleAuth.jsx";
 import SearchedBooks from "./components/SearchedBooks/SearchedBooks.jsx";
 import BooksList from "./components/BooksLsit/BooksList.jsx";
@@ -39,7 +39,7 @@ const routes = [
         element:<BookShelves/>,
         children: [
           {
-            path : "/main/BookShelves/:BookShelfId",
+            path : ":BookShelfId",
             element:<BooksList/>
           }
         ]

@@ -10,7 +10,7 @@ const BookShelvesProvider = ({ children }) => {
     const [BookShelves,setBookShelves]=useState([]);
     const { data, isLoading, error } = UseFetch(
       "https://www.googleapis.com/books/v1/mylibrary/bookshelves?key=AIzaSyDVJoJ9emOGe6Qsi2cf63H717RFn5P3Zb4",
-      [],
+      [accessToken],
       "GET",
       { Authorization: `Bearer ${accessToken}` }
     );
