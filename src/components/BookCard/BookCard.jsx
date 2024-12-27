@@ -8,6 +8,7 @@ import UseFetch from "../../CustomeHooks/UseFetch";
 const BookCardContext = createContext();
 
 export default function BookCard({ book, BookShelfId, children }) {
+  const cardId=useId();
   const { theme } = useContext(ThemeContext);
   const { accessToken } = useContext(AccessTokenContext);
   const { handleBooks } = useBooks();
@@ -32,6 +33,7 @@ export default function BookCard({ book, BookShelfId, children }) {
         theme,
         handleDelete,
         BookShelfId,
+        cardId
       }}
     >
       <div
@@ -48,7 +50,7 @@ export default function BookCard({ book, BookShelfId, children }) {
 }
 
 BookCard.Image = function Image() {
-  const { book } = useContext(BookCardContext);
+  const { book,cardId } = useContext(BookCardContext);
   const thumbnail =
     book.volumeInfo.imageLinks?.thumbnail ||
     book.volumeInfo.imageLinks?.smallThumbnail;
@@ -57,7 +59,7 @@ BookCard.Image = function Image() {
     <div className="relative h-40 mx-4 mt-4 overflow-hidden text-white rounded-md flex items-center justify-center">
       <img
         src={thumbnail}
-        alt="Book"
+        alt={`${cardId}image`}
         className="object-contain max-w-full max-h-full"
       />
     </div>
@@ -95,7 +97,7 @@ BookCard.ActionsContainer = function ActionsContainer({ children }) {
 };
 
 BookCard.DetailsButton = function DetailsButton() {
-  const { book, theme } = useContext(BookCardContext);
+  const { book, theme,cardId } = useContext(BookCardContext);
   return (
     <button
       className={`rounded-md py-2 px-8 border text-center text-sm transition-all shadow-md ${
@@ -103,7 +105,7 @@ BookCard.DetailsButton = function DetailsButton() {
           ? "bg-slate-800 text-white hover:bg-slate-700 hover:shadow-lg focus:bg-slate-700 focus:shadow-none active:bg-slate-700"
           : "bg-white text-black hover:bg-slate-500 hover:shadow-lg focus:bg-slate-500 focus:shadow-none active:bg-slate-500"
       }`}
-      type="button"
+      id={`${cardId}DetailsButton`}
     >
       <Link to={`/main/Book/${book.id}`}>Details</Link>
     </button>
@@ -121,6 +123,7 @@ BookCard.DeleteButton = function DeleteButton() {
           ? "bg-red-600 text-white hover:bg-red-500 hover:shadow-lg focus:bg-red-500 focus:shadow-none active:bg-red-500"
           : "bg-red-400 text-black hover:bg-red-300 hover:shadow-lg focus:bg-red-300 focus:shadow-none active:bg-red-300"
       }`}
+      id={`${cardId}DeleteButton`}
     >
       Delete Book
     </button>

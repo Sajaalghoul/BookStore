@@ -63,7 +63,7 @@ const NavBar = () => {
                     isActive ? "underline" : "hover:text-indigo-500"
                   }`
                 }
-                id={`${navButtonsId}${navigator.name}`}
+                id={`${navButtonsId}-${navigator.name}`}
               >
                 {navigator.name}
               </NavLink>
@@ -75,7 +75,7 @@ const NavBar = () => {
           <button
             className=" flex items-center gap-x-2 px-4 py-2 rounded-md"
             onClick={toggleTheme}
-            aria-label={`${navButtonsId}ToggleTheme`}
+            aria-label={`${navButtonsId}Toggle-Theme`}
           >
             <FontAwesomeIcon
               icon={theme === "light" ? "moon" : "sun"}
@@ -83,7 +83,7 @@ const NavBar = () => {
             />
           </button>
           {!menuOpen && (
-            <button onClick={toggleMenu} className="lg:hidden" aria-label={`${navButtonsId}menue`}>
+            <button onClick={toggleMenu} className="lg:hidden" aria-label={`${navButtonsId}Menue`}>
               <FontAwesomeIcon icon="bars" className="text-2xl" />
             </button>
           )}
