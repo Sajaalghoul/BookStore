@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useId, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars, faSun, faMoon } from "@fortawesome/free-solid-svg-icons";
 import { library } from "@fortawesome/fontawesome-svg-core";
@@ -13,6 +13,7 @@ import navigators from "../../Navigators";
 library.add(faBars, faSun, faMoon);
 
 const NavBar = () => {
+  const navButtonsId=useId();
   const location = useLocation();
 // Conditionally render the search bar only for the datalist royte
   const showSearch = location.pathname === '/main';
@@ -62,6 +63,7 @@ const NavBar = () => {
                     isActive ? "underline" : "hover:text-indigo-500"
                   }`
                 }
+                id={`${navButtonsId}${navigator.name}`}
               >
                 {navigator.name}
               </NavLink>
@@ -73,6 +75,7 @@ const NavBar = () => {
           <button
             className=" flex items-center gap-x-2 px-4 py-2 rounded-md"
             onClick={toggleTheme}
+            aria-label={`${navButtonsId}ToggleTheme`}
           >
             <FontAwesomeIcon
               icon={theme === "light" ? "moon" : "sun"}
@@ -80,7 +83,7 @@ const NavBar = () => {
             />
           </button>
           {!menuOpen && (
-            <button onClick={toggleMenu} className="lg:hidden">
+            <button onClick={toggleMenu} className="lg:hidden" aria-label={`${navButtonsId}menue`}>
               <FontAwesomeIcon icon="bars" className="text-2xl" />
             </button>
           )}

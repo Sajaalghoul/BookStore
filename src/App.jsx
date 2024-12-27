@@ -7,7 +7,7 @@ import FavouriteReducerProvider from "./Contexts/FavouriteReducerProvider";
 import SearchProvider from "./Contexts/SearchProvider";
 import AccessTokenProvider from "./Contexts/AccessTokenProvider";
 import BookShelvesProvider from "./Contexts/BookShelvesProvider";
-import ShelfProvider from "./Contexts/ShelfProvider";
+import BooksProvider from "./Contexts/BooksProvider";
 
 function App() {
   return (
@@ -17,9 +17,9 @@ function App() {
           <NavBar/>
         <BookShelvesProvider>
           <FavouriteReducerProvider>
-            <ShelfProvider>
+            <BooksProvider>
               <Outlet />
-            </ShelfProvider>
+            </BooksProvider>
           </FavouriteReducerProvider>
         </BookShelvesProvider>
       </SearchProvider>

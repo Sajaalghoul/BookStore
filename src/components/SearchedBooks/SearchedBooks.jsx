@@ -5,13 +5,16 @@ import { ThemeContext } from "../../Contexts/ThemeProvider";
 import { SearchContext } from "../../Contexts/SearchProvider";
 import { GOOGLE_BOOKS_API_KEY } from "../../config";
 import SearchedBooksView from "./SearchedBooksView";
+import { useBooks } from "../../Contexts/BooksProvider";
 
 
 const SearchedBooks = () => {
   const { theme } = useContext(ThemeContext);
   const { searchField } = useContext(SearchContext);
+  const {handleBooks}=useBooks();
   // Debounce for timing fetching data based on search changes
-  const debounced = UseDebounce(searchField, 1000);
+  
+  const debounced = UseDebounce(searchField,1000);
   console.log("heyy",searchField,debounced);
   
   // Custom fetch
@@ -34,6 +37,10 @@ const { data, isLoading, error } = UseFetch(url, [debounced]);
       return data.items.slice(firstPostsIndex, lastPostIndex);
     }, [data, firstPostsIndex, lastPostIndex]);
 
+    useEffect(() => {
+      // console.log("currentData",currentData);
+      handleBooks(currentData);
+    }, [currentData]);
   // Generate book cards
   // Render with ternary conditions
   return (
@@ -42,7 +49,6 @@ const { data, isLoading, error } = UseFetch(url, [debounced]);
     error={error}
     isLoading={isLoading}
     data={data}
-    currentData={currentData}
     postsPerPage={postsPerPage}
     setCurrentPage={setCurrentPage}
     currentPage={currentPage}

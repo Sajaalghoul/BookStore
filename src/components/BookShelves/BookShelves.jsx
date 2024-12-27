@@ -3,12 +3,12 @@ import UseFetch from '../../CustomeHooks/UseFetch';
 import { AccessTokenContext } from '../../Contexts/AccessTokenProvider';
 import { BookShelvesContext } from '../../Contexts/BookShelvesProvider';
 import { Link,Outlet,useParams  } from 'react-router-dom';
-import { ShelfContext } from '../../Contexts/ShelfProvider';
+import { useBooks } from "../../Contexts/BooksProvider";
 
 const BookShelves = () => {
   const { accessToken } = useContext(AccessTokenContext);
   const { BookShelves ,data, isLoading, error }=useContext(BookShelvesContext);
-  const {handleShelf}=useContext(ShelfContext);
+  const {handleBooks}=useBooks();
   const {BookShelfId}=useParams();
   const [shelfId , setSheldId]=useState(BookShelfId?parseInt(BookShelfId,10):-1);
     //get the fetch function to do it conditionally
@@ -25,7 +25,7 @@ const BookShelves = () => {
     );
     useEffect(()=>{
       if (shelfData) {
-        handleShelf(shelfData.items);
+        handleBooks(shelfData.items);
       }
     },[shelfData])
    

@@ -1,14 +1,16 @@
 import React, {memo,useContext} from "react";
 import BookCard from "../BookCard/BookCard";
 import { ThemeContext } from "../../Contexts/ThemeProvider";
-import { ShelfContext } from "../../Contexts/ShelfProvider";
 import { useParams } from "react-router-dom";
-
-const BooksList = ({booksData}) => {
+import { useBooks } from "../../Contexts/BooksProvider";
+import { SearchContext } from "../../Contexts/SearchProvider";
+const BooksList = () => {
+    const {books:data}=useBooks();
     const { theme } = useContext(ThemeContext);
     const {BookShelfId}=useParams();
-    const {shelf}=useContext(ShelfContext);
-    const data = booksData || shelf;
+    // const {shelf}=useContext(ShelfContext);
+    // const data = booksData || shelf;
+    // books
     const Books=data?.map((book) => {
         const thumbnail =
           book.volumeInfo.imageLinks?.thumbnail ||
@@ -16,14 +18,17 @@ const BooksList = ({booksData}) => {
         
         return (
           thumbnail && (
-            <BookCard
-              key={book.id}
-              title={book.volumeInfo.title}
-              image={thumbnail}
-              categories={book.volumeInfo.categories?.toString()}
-              id={book.id}
-              BookShelfId={BookShelfId}
-            />
+                 <BookCard book={book} BookShelfId={BookShelfId} key={book.id}>
+                  <BookCard.Image />
+                  <div className="px-4 py-2">
+                    <BookCard.Title />
+                    {!BookShelfId&&<BookCard.Categories />}
+                  </div>
+                   <BookCard.ActionsContainer>
+                   <BookCard.DetailsButton />
+                    {BookShelfId&&<BookCard.DeleteButton />}
+                  </BookCard.ActionsContainer>
+                </BookCard>
           )
         )});
         return (

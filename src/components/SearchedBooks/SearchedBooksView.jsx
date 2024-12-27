@@ -17,7 +17,7 @@ const SearchedBooksView =({theme,error,isLoading,data,currentData,postsPerPage,s
       <div>Loading...</div>
     ) : data?.items && data.items.length > 0 ? ( // Check for items in data
       <>
-        <BooksList booksData={currentData} />
+        <BooksList />
         <Pagination
           className="m-10"
           totalPosts={data?.items?.length}
