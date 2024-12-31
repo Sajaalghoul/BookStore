@@ -1,4 +1,4 @@
-import React, { useContext, createContext } from "react";
+import React, { useContext, createContext, useId } from "react";
 import { Link } from "react-router-dom";
 import { ThemeContext } from "../../Contexts/ThemeProvider";
 import { AccessTokenContext } from "../../Contexts/AccessTokenProvider";
@@ -113,7 +113,7 @@ BookCard.DetailsButton = function DetailsButton() {
 };
 
 BookCard.DeleteButton = function DeleteButton() {
-  const { BookShelfId,book, handleDelete, theme } = useContext(BookCardContext);
+  const { BookShelfId,book, handleDelete, theme,cardId } = useContext(BookCardContext);
 
   return (
     <button

@@ -3,7 +3,6 @@ import BookCard from "../BookCard/BookCard";
 import { ThemeContext } from "../../Contexts/ThemeProvider";
 import { useParams } from "react-router-dom";
 import { useBooks } from "../../Contexts/BooksProvider";
-import { SearchContext } from "../../Contexts/SearchProvider";
 const BooksList = () => {
     const {books:data}=useBooks();
     const { theme } = useContext(ThemeContext);
