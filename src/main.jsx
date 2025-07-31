@@ -4,8 +4,9 @@ import { createBrowserRouter,RouterProvider } from 'react-router-dom'
 import routes from './routes.jsx'
 import './index.css'
 
-const router=createBrowserRouter(routes);
-
+const router = createBrowserRouter(routes, {
+  basename: "/BookStore",
+});
 createRoot(document.getElementById('root')).render(
         <RouterProvider router={router}/>
 
